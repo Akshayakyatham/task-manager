@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Team Task Manager</h1>
+
+<div class="card">
+<h2>Authentication</h2>
+
+<input id="rname" placeholder="Name">
+<input id="remail" placeholder="Email">
+<input id="rpassword" type="password" placeholder="Password">
+
+<select id="rrole">
+  <option value="admin">Admin</option>
+  <option value="member">Member</option>
+</select>
+
+<button onclick="register()">Register</button>
+
+<hr>
+
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<p id="who"></p>
+</div>
+
+<div id="adminPanel" class="card">
+<h2>Assign Task</h2>
+
+<input id="title" placeholder="Task Title">
+<input type="file" id="taskFile">
+<select id="assignUser"></select>
+
+<button onclick="createTask()">Assign</button>
+</div>
+
+<div id="memberPanel" class="card">
+<h2>My Tasks</h2>
+<ul id="tasks"></ul>
+</div>
+
+<div class="card">
+<h2>Dashboard</h2>
+<p id="stats"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
