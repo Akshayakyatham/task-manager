@@ -111,7 +111,10 @@ def dashboard():
         "done": mongo.db.tasks.count_documents({"status": "done"}),
         "pending": mongo.db.tasks.count_documents({"status": "pending"})
     })
-
+@app.route("/")
+def home():
+    return {"message": "Backend is running"}
+    
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
