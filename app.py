@@ -112,8 +112,6 @@ def dashboard():
         "pending": mongo.db.tasks.count_documents({"status": "pending"})
     })
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
     if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
