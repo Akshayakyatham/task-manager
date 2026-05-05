@@ -65,11 +65,10 @@ async function loadUsers(){
 }
 
 // CREATE TASK (FIXED)
-async function createTask(){
-  if(!title.value){
-    alert("Enter task");
-    return;
-  }
+if(!title.value || !assignUser.value){
+  alert("Enter task and select user");
+  return;
+}
 
   let formData = new FormData();
   formData.append("title", title.value);
