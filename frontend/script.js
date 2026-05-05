@@ -105,6 +105,13 @@ async function loadTasks(){
   if(role === "member"){
     url = API + "/tasks?user_id=" + userId;
   }
+  if(t.task_file){
+  let link = document.createElement("a");
+  link.href = API + "/download/" + t.task_file;
+  link.innerText = " Download";
+  link.target = "_blank";
+  li.appendChild(link);
+}
 
   const res = await fetch(url);
   const data = await res.json();
