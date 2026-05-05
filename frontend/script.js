@@ -39,12 +39,7 @@ async function login(){
 
   who.innerText = "Logged in as: " + role;
 
-  if(role === "admin"){
-    adminPanel.style.display = "block";
-  } else {
-    adminPanel.style.display = "none";
-  }
-
+  adminPanel.style.display = (role === "admin") ? "block" : "none";
   memberPanel.style.display = "block";
 
   loadUsers();
@@ -69,35 +64,33 @@ async function loadUsers(){
   });
 }
 
-// CREATE TASK
+// CREATE TASK (FIXED)
 async function createTask(){
   if(!title.value){
     alert("Enter task");
     return;
   }
 
-  if(role !== "admin"){
-    alert("Only admin can assign");
-    return;
+  let formData = new FormData();
+  formData.append("title", title.value);
+  formData.append("assigned_to", assignUser.value);
+
+  if(taskFile.files[0]){
+    formData.append("file", taskFile.files[0]);
   }
 
   await fetch(API+"/tasks", {
     method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({
-      title:title.value,
-      assigned_to:assignUser.value
-    })
+    body: formData
   });
 
   alert("Task Assigned");
-
   title.value = "";
 
   loadTasks();
 }
 
-// LOAD TASKS
+// LOAD TASKS (FULL FIX)
 async function loadTasks(){
 
   let url = API + "/tasks";
@@ -105,13 +98,6 @@ async function loadTasks(){
   if(role === "member"){
     url = API + "/tasks?user_id=" + userId;
   }
-  if(t.task_file){
-  let link = document.createElement("a");
-  link.href = API + "/download/" + t.task_file;
-  link.innerText = " Download";
-  link.target = "_blank";
-  li.appendChild(link);
-}
 
   const res = await fetch(url);
   const data = await res.json();
@@ -122,6 +108,7 @@ async function loadTasks(){
   tasks.innerHTML = "";
 
   data.forEach(t=>{
+
     let u = users.find(x => String(x._id) === String(t.assigned_to));
 
     let li = document.createElement("li");
@@ -131,15 +118,27 @@ async function loadTasks(){
       " | Assigned to: " + (u ? u.name : "") +
       " | Status: " + t.status;
 
+    // DOWNLOAD FILE
+    if(t.task_file){
+      let link = document.createElement("a");
+      link.href = API + "/download/" + t.task_file;
+      link.innerText = " Download";
+      link.target = "_blank";
+      li.appendChild(link);
+    }
+
+    // MEMBER SUBMIT
     if(role === "member" && t.status === "pending"){
       let btn = document.createElement("button");
       btn.innerText = "Submit";
 
       btn.onclick = async ()=>{
+        let formData = new FormData();
+        formData.append("status", "submitted");
+
         await fetch(API+"/tasks/"+t._id, {
           method:"PUT",
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({ status:"submitted" })
+          body: formData
         });
 
         loadTasks();
@@ -149,15 +148,18 @@ async function loadTasks(){
       li.appendChild(btn);
     }
 
+    // ADMIN APPROVE
     if(role === "admin" && t.status === "submitted"){
       let btn = document.createElement("button");
       btn.innerText = "Approve";
 
       btn.onclick = async ()=>{
+        let formData = new FormData();
+        formData.append("status", "done");
+
         await fetch(API+"/tasks/"+t._id, {
           method:"PUT",
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({ status:"done" })
+          body: formData
         });
 
         loadTasks();
@@ -168,7 +170,6 @@ async function loadTasks(){
     }
 
     tasks.appendChild(li);
-    formData.append("assigned_to", assignUser.value);
   });
 }
 
