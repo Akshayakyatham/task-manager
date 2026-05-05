@@ -65,10 +65,11 @@ async function loadUsers(){
 }
 
 // CREATE TASK (FIXED)
-if(!title.value || !assignUser.value){
-  alert("Enter task and select user");
-  return;
-}
+async function createTask(){
+  if(!title.value || !assignUser.value){
+    alert("Enter task and select user");
+    return;
+  }
 
   let formData = new FormData();
   formData.append("title", title.value);
@@ -89,7 +90,7 @@ if(!title.value || !assignUser.value){
   loadTasks();
 }
 
-// LOAD TASKS (FULL FIX)
+// LOAD TASKS
 async function loadTasks(){
 
   let url = API + "/tasks";
@@ -117,7 +118,7 @@ async function loadTasks(){
       " | Assigned to: " + (u ? u.name : "") +
       " | Status: " + t.status;
 
-    // DOWNLOAD FILE
+    // DOWNLOAD
     if(t.task_file){
       let link = document.createElement("a");
       link.href = API + "/download/" + t.task_file;
