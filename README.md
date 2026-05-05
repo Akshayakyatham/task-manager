@@ -66,7 +66,8 @@ This is a full-stack web application that allows users to create, assign, and ma
 👉 https://task-manager-xila.onrender.com
 
 ### 🚆 Backend (Railway - Required)
-👉 https://web-production-99447b.up.railway.app
+👉 https://web-production-99447b.up.railway.app  
+*(Deployment successful, but currently not accessible due to platform/network issue)*
 
 ---
 
