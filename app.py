@@ -74,7 +74,7 @@ def create_task():
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
     user_id = request.args.get("user_id")
-    query = {"assigned_to": user_id} if user_id else {}
+   query = {"assigned_to": str(user_id)} if user_id else {}
 
     return jsonify([
         {**t, "_id": str(t["_id"])}
