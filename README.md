@@ -1,4 +1,9 @@
-# 📌 Team Task Manager (Full-Stack)
+# 📌 Team Task Manager 
+
+## 🌟 Key Highlight
+A complete full-stack task management system with role-based access, file upload functionality, and cloud deployment.
+
+---
 
 ## 🚀 Project Overview
 This is a full-stack web application that allows users to create, assign, and manage tasks with role-based access (Admin & Member).
@@ -19,7 +24,10 @@ This is a full-stack web application that allows users to create, assign, and ma
 - Create and assign tasks
 - Track task status:
   - Pending → Submitted → Done
-- File upload & submission support
+
+### 📁 File Handling
+- Admin uploads task files
+- Members download and submit completed files
 
 ### 📊 Dashboard
 - Total tasks
@@ -54,11 +62,17 @@ This is a full-stack web application that allows users to create, assign, and ma
 ### 🌐 Frontend (Vercel)
 👉 https://task-manager-kohl-chi.vercel.app/
 
-### ⚙️ Backend (Working - Render)
+### ⚙️ Backend (Render - Working)
 👉 https://task-manager-xila.onrender.com
 
 ### 🚆 Backend (Railway - Required)
-👉 https://web-production-99447b.up.railway.app *(Deployment successful, but domain DNS issue)*
+👉 https://web-production-99447b.up.railway.app
+
+---
+
+## 🎥 Demo Video
+
+👉 https://drive.google.com/file/d/1Wm7H2v3711rF0ySfXZ_6MoATWSIriOuQ/view?usp=drive_link
 
 ---
 
@@ -84,26 +98,21 @@ This is a full-stack web application that allows users to create, assign, and ma
 
 ## 🧠 System Architecture
 
-Frontend (Vercel)  
+Client (Frontend - Vercel)  
 ↓  
-Flask Backend (Railway / Render)  
+Flask REST API (Backend - Railway / Render)  
 ↓  
-MongoDB Atlas  
+MongoDB Atlas (Cloud Database)
 
 ---
 
 ## ⚠️ Railway Deployment Note
 
-The application was successfully deployed on Railway and the container is running correctly.
+The application was successfully deployed on Railway and the backend service is running.
 
-However, the Railway public domain is not resolving due to a DNS routing issue.
+However, the public Railway domain is currently not accessible due to a platform-level networking issue.
 
-Evidence:
-- Deployment logs show app running on `0.0.0.0`
-- No HTTP requests reaching service
-- Domain returns `DNS_PROBE_FINISHED_NXDOMAIN`
-
-👉 To ensure functionality, a working deployment is provided using Render.
+To ensure full functionality and testing, an alternative deployment using Render has been provided.
 
 ---
 
