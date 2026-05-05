@@ -115,7 +115,7 @@ async function loadTasks(){
   tasks.innerHTML = "";
 
   data.forEach(t=>{
-    let u = users.find(x => x._id === t.assigned_to);
+    let u = users.find(x => String(x._id) === String(t.assigned_to));
 
     let li = document.createElement("li");
 
@@ -161,6 +161,7 @@ async function loadTasks(){
     }
 
     tasks.appendChild(li);
+    formData.append("assigned_to", assignUser.value);
   });
 }
 
